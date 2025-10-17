@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 class Customer:
-    def __init__(self, store, goal_section, algorithm = "bfs"):
+    def __init__(self, store:Store, goal_section, algorithm = "bfs"):
         self.store = store
         self.position = store.entry
         self.goal = store.sections[goal_section]

@@ -23,6 +23,7 @@ Thumbs.db
 *.png
 *.pdf
 *.csv
+*.txt
 store_sim/src/*_report.txt
 store_sim/src/algorithm_comparison.png
 

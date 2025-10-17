@@ -2,6 +2,7 @@ from pathlib import Path
 import csv
 import random
 import networkx as nx
+import pandas as pd
 
 class Store:
     def __init__(self, rows=8, cols=6, seed: int | None = None):
@@ -14,16 +15,10 @@ class Store:
         self.exit = (rows - 1, cols - 1)
         reserved = {self.entry, self.exit}
 
-        csv_path = Path(__file__).resolve().parents[1] / "data" / "retail_sales_dataset.csv"
-        categories = []
-        seen = set()
-        with csv_path.open(newline="", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                cat = row["Product Category"].strip()
-                if cat not in seen:
-                    seen.add(cat)
-                    categories.append(cat)
+        csv_path = r"C:\Users\Diego Andres\Documents\Universidad\Semestres\8 Semestre\AIDA_M\TallerAIDA\store_sim\data\retail_sales_dataset.csv"
+        df = pd.read_csv(csv_path)
+        categories = df['Product Category'].unique().tolist()
+        #seen = set()
 
         available_positions = [(r, c) for r in range(rows) for c in range(cols) if (r, c) not in reserved]
 

@@ -1,5 +1,5 @@
 import numpy as np
-from customer import Customer
+from .customer import Customer
 import random
 
 class Simulation:

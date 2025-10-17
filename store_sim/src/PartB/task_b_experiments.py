@@ -1,7 +1,7 @@
-from store import Store
-from simulation import Simulation
-from analytics import StoreAnalytics
-from heatmap import create_heatmap
+from ..PartA.store import Store
+from ..PartA.simulation import Simulation
+from .analytics import StoreAnalytics
+from ..PartA.heatmap import create_heatmap
 import matplotlib.pyplot as plt
 
 
