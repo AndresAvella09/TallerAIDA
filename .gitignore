@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual envs
+venv/
+.env/
+.tallerAIDA/
+# Proyecto venv existente
+TallerAIDA/
+tallerAIDA/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Data & outputs
+*.png
+*.pdf
+*.csv
+store_sim/src/*_report.txt
+store_sim/src/algorithm_comparison.png
+
+# Logs
+*.log

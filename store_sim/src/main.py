@@ -1,12 +1,13 @@
 import pygame
 from store import Store
 from simulation import Simulation
+from heatmap import create_heatmap
 
 class Game:
     def __init__(self, cell_size = 80):
         pygame.init()
         self.store = Store()
-        self.sim = Simulation(self.store, num_customers = 10)
+        self.sim = Simulation(self.store, num_customers = 3)
         self.cell_size = cell_size
         self.screen = pygame.display.set_mode((self.store.cols*cell_size, self.store.rows*cell_size))
         self.clock = pygame.time.Clock()
@@ -45,6 +46,10 @@ class Game:
             self.draw_customers()
             pygame.display.flip()
             self.clock.tick(1)
+        
+        # Generar el mapa de calor al final de la simulación
+        create_heatmap(self.sim.traffic, self.store)
+        
         pygame.quit()
 
 if __name__ == "__main__":

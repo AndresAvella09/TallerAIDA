@@ -1,3 +1,5 @@
+from typing import List, Tuple
+
 class Customer:
     def __init__(self, store, goal_section, algorithm = "bfs"):
         self.store = store
