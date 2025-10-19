@@ -1,23 +1,31 @@
+from typing import List, Tuple, TYPE_CHECKING
 from pathlib import Path
 import csv
 import random
 import networkx as nx
 import pandas as pd
+if TYPE_CHECKING:
+    from .customer import Customer
 
 class Store:
-    def __init__(self, rows=8, cols=6, seed: int | None = None):
+    def __init__(self,
+                 rows:int = 8,
+                 cols:int=6,
+                 seed: int | None = None,
+                 categories:int = 4):
 
         self.rows = rows
         self.cols = cols
         self.graph = nx.grid_2d_graph(rows, cols)
-
         self.entry = (0, 0)
         self.exit = (rows - 1, cols - 1)
         reserved = {self.entry, self.exit}
+        self.categories:list = list(range(categories))
 
-        csv_path = r"C:\Users\Diego Andres\Documents\Universidad\Semestres\8 Semestre\AIDA_M\TallerAIDA\store_sim\data\retail_sales_dataset.csv"
-        df = pd.read_csv(csv_path)
-        categories = df['Product Category'].unique().tolist()
+        # Usar ruta relativa al archivo actual
+        #csv_path = Path(__file__).parent.parent.parent / "data" / "retail_sales_dataset.csv"
+        #df = pd.read_csv(csv_path)
+        # = df['Product Category'].unique().tolist()
         #seen = set()
 
         available_positions = [(r, c) for r in range(rows) for c in range(cols) if (r, c) not in reserved]
@@ -25,13 +33,13 @@ class Store:
         if seed is not None:
             random.seed(seed)
 
-        n_to_place = min(len(categories), len(available_positions))
-
+        n_to_place = min(len(self.categories), len(available_positions))
+        
         chosen_positions = random.sample(available_positions, k=n_to_place)
 
         self.sections = {}
-        for cat, pos in zip(categories[:n_to_place], chosen_positions):
-            key = cat.lower().replace(" ", "_")
+        for cat, pos in zip(self.categories[:n_to_place], chosen_positions):
+            key = str(cat)
             self.sections[key] = pos
             self.graph.nodes[pos]["zone"] = key
             self.graph.nodes[pos]["label"] = cat
@@ -43,10 +51,11 @@ class Store:
             self.graph.nodes[node]["zone"] = "pasillo"
         for name, pos in self.sections.items():
             self.graph.nodes[pos]["zone"] = name
+            
     
 
 
-    def _resolve_goal_pos(self, goal):
+    def _resolve_goal_pos(self, goal:str) -> Tuple[int, int]:
         if isinstance(goal, tuple):
             return goal
         if goal in self.sections:
@@ -58,7 +67,14 @@ class Store:
 
 
 
-    def get_path(self, start, goal, method="bfs", forbid_other_sections: bool = True):
+    def get_path(
+        self,
+        start: Tuple[int,int],
+        goal:str,
+        method: str = "bfs",
+        forbid_other_sections: bool = True
+        ) -> List[Tuple[int, int]]: 
+        
         goal_pos = self._resolve_goal_pos(goal)
 
         G = self.graph.copy()
@@ -82,3 +98,8 @@ class Store:
                 return nx.shortest_path(G, source=start, target=goal_pos)
         except nx.NetworkXNoPath:
             return []
+        
+    def add_customer(self, customer: "Customer", debug:bool = False) -> None:
+        self.customers.append(customer)
+        if debug:
+            print(f"[DEBUG] Customer agregado. Total: {len(self.customers)}")

@@ -1,31 +1,10 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
-
-# Virtual envs
-venv/
-.env/
-.tallerAIDA/
-# Proyecto venv existente
-TallerAIDA/
-tallerAIDA/
-
-# OS / IDE
+.venv/
 .DS_Store
-Thumbs.db
-.vscode/
-.idea/
-
-# Data & outputs
-*.png
-*.pdf
-*.csv
+store_sim/src/__pycache__/
 *.txt
-store_sim/src/*_report.txt
-store_sim/src/algorithm_comparison.png
-
-# Logs
-*.log
+**/__pycache__/
+*.png
+.gitignore
+Grafos/
+RNN/
+store_sim/data/EDA.ipynb
