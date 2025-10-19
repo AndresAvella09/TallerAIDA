@@ -23,9 +23,14 @@ Thumbs.db
 *.png
 *.pdf
 *.csv
-*.txt
 store_sim/src/*_report.txt
 store_sim/src/algorithm_comparison.png
+
+# GAN - Archivos pesados
+checkpoints/*.pth
+data/FashionMNIST/
+*.gz
+*.ubyte
 
 # Logs
 *.log
