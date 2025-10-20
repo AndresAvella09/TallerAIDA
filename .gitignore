@@ -1,30 +1,21 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
-
-# Virtual envs
-venv/
-.env/
-.tallerAIDA/
-# Proyecto venv existente
-TallerAIDA/
-tallerAIDA/
-
-# OS / IDE
+.venv/
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 
+# Python cache
+store_sim/src/__pycache__/
+**/__pycache__/
+
 # Data & outputs
 *.png
 *.pdf
 *.csv
+*.txt
 store_sim/src/*_report.txt
 store_sim/src/algorithm_comparison.png
+store_sim/data/EDA.ipynb
 
 # GAN - Archivos pesados
 checkpoints/*.pth
@@ -34,3 +25,7 @@ data/FashionMNIST/
 
 # Logs
 *.log
+
+# Other directories
+Grafos/
+RNN/
