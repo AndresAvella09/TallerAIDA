@@ -29,3 +29,5 @@ data/FashionMNIST/
 # Other directories
 Grafos/
 RNN/
+store_sim/data/EDA.ipynb
+../.DS_Store
